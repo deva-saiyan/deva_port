@@ -246,7 +246,7 @@ functional web applications. Whether it’s coding or designing, I enjoy creatin
                     <h2 class="heading">Contact Me</h2>
                     <span>get in touch with me</span>
                 </div>
-                <form action="https://formspree.io/f/mldlzqky" method="post" enctype="text/plain">
+                <form id="contactForm">
     <div class="input-box">
         <input type="text" name="first_name" placeholder="First Name" required>
         <input type="text" name="last_name" placeholder="Last Name" required>
@@ -258,6 +258,36 @@ functional web applications. Whether it’s coding or designing, I enjoy creatin
         <button type="submit" class="btn">Send Message</button>
     </div>
 </form>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        first_name: this.first_name.value,
+        last_name: this.last_name.value,
+        email: this.email.value,
+        subject: this.subject.value,
+        message: this.message.value
+    };
+
+    fetch('https://formspree.io/f/abcdxyz', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Message sent successfully!');
+        } else {
+            alert('Error sending message.');
+        }
+    });
+});
+</script>
+
 
 
             </div>
